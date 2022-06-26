@@ -67,4 +67,4 @@ Transaction hash:  0x2b133faf11f130ebaee6a4b6901c801b36a3c14ee6393f0da891e3849d7
 Voter with address 0xAeC1d37Ec896b6B3d8367A2974Ba4549fac5c58E has voted to the proposal with index 1
 
 6- Inspecting the voting result:
-The winning proposal is: 0x50726f706f73616c320000000000000000000000000000000000000000000000
+The winning proposal is: Proposal2

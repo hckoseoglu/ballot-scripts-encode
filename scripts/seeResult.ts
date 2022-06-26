@@ -7,7 +7,10 @@ async function main() {
   const Ballot = await ethers.getContractFactory("Ballot");
   const ballot = Ballot.attach(ballotAddr);
   const winnerName = await ballot.winnerName();
-  console.log("The winning proposal is:", winnerName);
+  console.log(
+    "The winning proposal is:",
+    ethers.utils.parseBytes32String(winnerName)
+  );
 }
 
 // We recommend this pattern to be able to use async/await everywhere
