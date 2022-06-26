@@ -1,0 +1,70 @@
+1-Deployment:
+Transaction hash:  0x5c391f2f5c7493374832c46b7578e9e9c45f92f138348f65fd88a66644fc11ef
+Ballot contract deployed to: 0x887887e949C5D95a0D404F9DAde3f21F1dF2B0f8
+
+2-Querying
+
+Querying the first proposal with following command:
+yarn run ts-node --files scripts/queryProposals.ts 0x887887e949C5D95a0D404F9DAde3f21F1dF2B0f8 0
+Result:
+[
+  '0x50726f706f73616c310000000000000000000000000000000000000000000000',
+  BigNumber { value: "0" },
+  name: '0x50726f706f73616c310000000000000000000000000000000000000000000000',
+  voteCount: BigNumber { value: "0" }
+]
+
+Querying the second proposal with following command:
+yarn run ts-node --files scripts/queryProposals.ts 0x887887e949C5D95a0D404F9DAde3f21F1dF2B0f8 1
+Result:
+[
+  '0x50726f706f73616c320000000000000000000000000000000000000000000000',
+  BigNumber { value: "0" },
+  name: '0x50726f706f73616c320000000000000000000000000000000000000000000000',
+  voteCount: BigNumber { value: "0" }
+]
+
+Querying the third proposal with following command:
+yarn run ts-node --files scripts/queryProposals.ts 0x887887e949C5D95a0D404F9DAde3f21F1dF2B0f8 2
+Result:
+[
+  '0x50726f706f73616c330000000000000000000000000000000000000000000000',
+  BigNumber { value: "0" },
+  name: '0x50726f706f73616c330000000000000000000000000000000000000000000000',
+  voteCount: BigNumber { value: "0" }
+]
+
+3-Give voting rights:
+Transaction hash: 0x9e4114d5f8516738bde5a14ebbea07fbd77581d23c2e7d7b7936065807253677
+Voting right is given to: 0x464b10f3E2AB3e49B32d1D21feBafbbf0a4059D9
+
+4-Vote Ballot:
+Transaction hash: 0xd46c59241515cab982efef47fd8a94ea8f3fd84e732e9ab0224d0c4777073370
+Voter with address 0x464b10f3E2AB3e49B32d1D21feBafbbf0a4059D9 has voted to the proposal with index 0
+
+5-Delegate Vote
+For doing this first we will have to give vote rights to another account from chairman 
+which will then delegate the voting rights
+For giving rights:
+Transaction hash:  0x75099420237ab96c23ddab8424b5dec147715243d5e4de990ab8f2c7caec6a5c
+Voting right is given to:  0xF7c4A02B846474e56aA3222c161a1DB18FEA2e04
+Secondly because of the following assertion require(delegate_.weight >= 1); we should give voting
+rights to the address we will delegate the vote to as well.
+For giving rights:
+Transaction hash:  0xd9c28d0f931779c31c314c6b241424801df5798c5ab4b7e928d664d37cdf569b
+Voting right is given to:  0xAeC1d37Ec896b6B3d8367A2974Ba4549fac5c58E
+
+Now we can delegate from 0xF7c4A02B846474e56aA3222c161a1DB18FEA2e04 
+to 0xAeC1d37Ec896b6B3d8367A2974Ba4549fac5c58E
+Delegating vote:
+Transaction hash:  0xdfb1809fcdf958c1416e75c1da6c98a6d6be3d3556b2585fded87d60d4da0ec5
+Voter with address 0xF7c4A02B846474e56aA3222c161a1DB18FEA2e04 has delegated his vote to 0xAeC1d37Ec896b6B3d8367A2974Ba4549fac5c58E
+
+Now lets vote with the voter 0xAeC1d37Ec896b6B3d8367A2974Ba4549fac5c58E
+to the second propsal which will increase the vote count by 2 as the voter has weight of 2
+Voting ballot:
+Transaction hash:  0x2b133faf11f130ebaee6a4b6901c801b36a3c14ee6393f0da891e3849d72fdd5
+Voter with address 0xAeC1d37Ec896b6B3d8367A2974Ba4549fac5c58E has voted to the proposal with index 1
+
+6- Inspecting the voting result:
+The winning proposal is: 0x50726f706f73616c320000000000000000000000000000000000000000000000

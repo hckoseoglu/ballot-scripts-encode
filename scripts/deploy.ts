@@ -1,25 +1,22 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// When running the script with `npx hardhat run <script>` you'll find the Hardhat
-// Runtime Environment's members available in the global scope.
 import { ethers } from "hardhat";
 
+const convertStrToBytes32 = (str: string) => {
+  return ethers.utils.formatBytes32String(str);
+};
+
 async function main() {
-  // Hardhat always runs the compile task when running scripts with its command
-  // line interface.
-  //
-  // If this script is run directly using `node` you may want to call compile
-  // manually to make sure everything is compiled
-  // await hre.run('compile');
+  const proposalNames = [
+    convertStrToBytes32("Proposal1"),
+    convertStrToBytes32("Proposal2"),
+    convertStrToBytes32("Proposal3"),
+  ];
 
-  // We get the contract to deploy
-  const Greeter = await ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
+  const Ballot = await ethers.getContractFactory("Ballot");
+  const ballot = await Ballot.deploy(proposalNames);
 
-  await greeter.deployed();
-
-  console.log("Greeter deployed to:", greeter.address);
+  const txn = await ballot.deployed();
+  console.log("Transaction hash: ", txn.deployTransaction.hash);
+  console.log("Ballot contract deployed to:", ballot.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
